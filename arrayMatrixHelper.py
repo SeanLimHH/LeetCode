@@ -236,6 +236,7 @@ def getColumns(matrix):
         return None
     
 def getMax(matrix, returnRow = 0, returnColumn = 0):
+    
     print("\ngetMax(): Returns the maximum element in matrix or list. Set returnRow = 1 to return the row index of maximum and or set returnColumn = 1 to return the column index of maximum")
     print("Returns max element, max element's row, max element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
@@ -305,7 +306,8 @@ def getMax(matrix, returnRow = 0, returnColumn = 0):
         return None
     
 def getMin(matrix, returnRow = 0, returnColumn = 0):
-    print("\ngetMin(): Returns the minimum element in matrix or list. Set returnRow = 1 to return the row index of maximum and or set returnColumn = 1 to return the column index of maximum")
+
+    print("\ngetMin(): Returns the minimum element in matrix or list. Set returnRow = 1 to return the row index of minimum and or set returnColumn = 1 to return the column index of minimum")
     print("Returns min element, min element's row, min element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
 
