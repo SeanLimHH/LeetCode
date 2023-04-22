@@ -142,7 +142,7 @@ def tourist(k, c):
     columns = getColumns(matrix)
     for row in range(1, rows):
         for column in range(row-1, columns):
-            if column <= getColumns(k) and (row + column <= c):
+            if column <= getColumns(k) and (row + column <= c) and column < len(k):
                 setEntry(matrix, row, column, max(getEntry(matrix,row-1,column),getEntry(matrix,row,column-1))+k[column])
 
     return getMax(matrix)
