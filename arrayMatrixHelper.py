@@ -2,6 +2,7 @@ def createList(size, initialisedValue = 0):
     return [initialisedValue for _ in range(size)]
 
 def printList(list_):
+
     try:
         if (isinstance(list_[0],list)):
             print("Error occurred.")
@@ -28,7 +29,12 @@ def printList(list_):
                 maxLengthForFormatting = len(str(element))
 
     for element in list_:
-        print(f"{element:<{2*maxLengthForFormatting}}  ", end="")
+        try:
+            print(f"{element:<{2*maxLengthForFormatting}}", end="")
+        except TypeError:
+            print('Error occured.')
+            print('Data type of list unsuitable to be printed in this function.')
+            return None
     print("\n")
 
 def create2DMatrix(rows, columns, initialisedValue = 0):
