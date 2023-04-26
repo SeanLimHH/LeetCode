@@ -26,7 +26,6 @@ class MaxHeap:
                 if nodeIndex >= len(self.heap):
                     line += ' ' * nodeSpacing
                 else:
-                    #nodeStr = str(self.heap[nodeIndex]).center(nodeSpacing)
                     nodeStr = f'{str(self.heap[nodeIndex]):^{nodeSpacing}}'
                     line += nodeStr
                 line += ' ' * nodeSpacing
