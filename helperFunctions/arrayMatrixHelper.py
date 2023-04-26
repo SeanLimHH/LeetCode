@@ -454,7 +454,11 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Please enter a valid string length!")
                 return None
             
-            return [''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(size)]
+            if info:
+                print("Created list:")
+                _ = [''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(size)]
+                printList(_)
+            return _
             
 
         case "int":
@@ -480,7 +484,11 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Please ensure that the ending number (inclusive) should be >= starting number (inclusive)!")
                 return None
             
-            return [random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
+            if info:
+                print("Created list:")
+                _ = [random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
+                printList(_)
+            return _
         
         case "float":
             try:
@@ -505,7 +513,11 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Please ensure that the ending number (inclusive) should be >= starting number (inclusive)!")
                 return None
             
-            return [random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
+            if info:
+                print("Created list:")
+                _ = [random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
+                printList(_)
+            return _
         
         case _:
             print("Please enter a valid parameter type for dataType for createListRandom()!. It should either be 'int', 'float' or 'str'!")
@@ -553,6 +565,10 @@ def create2DMatrixRandom(dataType, rows = 1, columns = 1,startingNumberInclusive
                 return None
         lettersDigits = string.ascii_letters + string.digits
 
+        if info:
+            _ = [[''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(columns)] for _ in range(rows)]
+            print2DMatrix(_)
+            
         return [[''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(columns)] for _ in range(rows)]
             
 
@@ -579,7 +595,10 @@ def create2DMatrixRandom(dataType, rows = 1, columns = 1,startingNumberInclusive
             print("Error occurred.")
             print("Please ensure that the ending number (inclusive) should be >= starting number (inclusive)!")
             return None
-            
+
+        if info:
+            _ = [[random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(columns)] for _ in range(rows)]
+            print2DMatrix(_)
  
         return [[random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(columns)] for _ in range(rows)]
         
@@ -608,5 +627,9 @@ def create2DMatrixRandom(dataType, rows = 1, columns = 1,startingNumberInclusive
             print("Error occurred.")
             print("Please ensure that the ending number (inclusive) should be >= starting number (inclusive)!")
             return None
-            
+        
+        if info:
+            _ = [[random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(columns)] for _ in range(rows)]
+            print2DMatrix(_)
+
         return [[random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(columns)] for _ in range(rows)]
