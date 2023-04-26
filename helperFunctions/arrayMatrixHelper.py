@@ -458,7 +458,7 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Created list:")
                 _ = [''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(size)]
                 printList(_)
-            return _
+            return [''.join(random.choice(lettersDigits) for _ in range(stringLength)) for _ in range(size)]
             
 
         case "int":
@@ -488,7 +488,7 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Created list:")
                 _ = [random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
                 printList(_)
-            return _
+            return [random.randrange(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
         
         case "float":
             try:
@@ -517,7 +517,7 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
                 print("Created list:")
                 _ = [random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
                 printList(_)
-            return _
+            return [random.uniform(startingNumberInclusive, endingNumberInclusive) for _ in range(size)]
         
         case _:
             print("Please enter a valid parameter type for dataType for createListRandom()!. It should either be 'int', 'float' or 'str'!")

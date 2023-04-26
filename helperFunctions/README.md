@@ -99,6 +99,29 @@ Inputing whether the graph should be directional and should have weights, it cal
 11. bellman_ford
 12. dijkstra
 
-#togglePrinting
+# heaps.py
+Implements max heap and min heap with its basic functions
+1. MaxHeap
+2. MaxHeap.printHeap
+3. MaxHeap.getParent
+4. MaxHeap.getLeftChild
+5. MaxHeap.getRightChild
+6. MaxHeap.swap
+7. MaxHeap.insert
+8. MaxHeap.buildMaxHeap
+9. MaxHeap.maxHeapify
+10. MaxHeap.extractMax
+11. MinHeap
+12. MinHeap.printHeap
+13. MinHeap.getParent
+14. MinHeap.getLeftChild
+15. MinHeap.getRightChild
+16. MinHeap.swap
+17. MinHeap.insert
+18. MinHeap.buildMaxHeap
+19. MinHeap.maxHeapify
+20. MinHeap.extractMax
+
+# togglePrinting.py
 Create a TogglePrint object, call .enable() or .e() to enable printing; .disable() or .d() to disable printing
 1. TogglePrint
