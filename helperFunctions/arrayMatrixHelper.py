@@ -1,4 +1,7 @@
-def createList(size, initialisedValue = 0):
+def createList(size, initialisedValue = 0, info = 0):
+    if info:
+        print('\ncreateList()')
+        printList([initialisedValue for _ in range(size)])
     return [initialisedValue for _ in range(size)]
 
 def printList(list_):
@@ -37,7 +40,10 @@ def printList(list_):
             return None
     print("\n")
 
-def create2DMatrix(rows, columns, initialisedValue = 0):
+def create2DMatrix(rows, columns, initialisedValue = 0, info = 0):
+    if info:
+        print('\ncreate2DMatrix()')
+        print2DMatrix([[initialisedValue for _ in range(columns)] for _ in range(rows)])
     return [[initialisedValue for _ in range(columns)] for _ in range(rows)]
 
 def print2DMatrix(matrix):
@@ -75,8 +81,10 @@ def print2DMatrix(matrix):
         print()
     print()
 
-def getEntry(matrix, rowIndex, columnIndex):
-    print("\ngetEntry(): Returns the entry in the matrix at row rowIndex and column columnIndex")
+def getEntry(matrix, rowIndex, columnIndex, info = 0):
+    if info:
+        print("\ngetEntry()")
+        print(f"Returns the entry in the matrix at row {rowIndex} and column {columnIndex}.")
     try:
         rowIndex = int(rowIndex)
         columnIndex = int(columnIndex)
@@ -84,20 +92,24 @@ def getEntry(matrix, rowIndex, columnIndex):
         if rowIndex >= len(matrix):
             print("Error occurred.")
             print("Row index is larger than number of rows! Please enter a valid row index!")
+            return None
 
         if columnIndex >= len(matrix):
             print("Error occurred.")
             print("Column index is larger than number of columns! Please enter a valid column index!")
-
+            return None
+        
     except ValueError:
         print("Please enter a valid integer >= 0 for row index and column index!")
         return None
-    
-    print(f"Value of cell: row index {rowIndex} column index {columnIndex} is :", matrix[rowIndex][columnIndex])
+    if info:
+        print(f"Value of cell: row index {rowIndex} column index {columnIndex} is :", matrix[rowIndex][columnIndex])
     return matrix[rowIndex][columnIndex]
 
-def setEntry(matrix, rowIndex, columnIndex, newValue):
-    print("\nsetEntry(): Updates entry of matrix. It is simply matrix[rowIndex][columnIndex] = value")
+def setEntry(matrix, rowIndex, columnIndex, newValue, info = 0):
+    if info:
+        print("\nsetEntry()")
+        print("Updates entry of matrix. It is simply matrix[rowIndex][columnIndex] = value")
     try:
         rowIndex = int(rowIndex)
         columnIndex = int(columnIndex)
@@ -105,23 +117,28 @@ def setEntry(matrix, rowIndex, columnIndex, newValue):
         if rowIndex >= len(matrix):
             print("Error occurred.")
             print("Row index is larger than number of rows! Please enter a valid row index!")
-
+            return None
+        
         if columnIndex >= len(matrix):
             print("Error occurred.")
             print("Column index is larger than number of columns! Please enter a valid column index!")
-            
+            return None
+        
     except ValueError:
         print("Please enter a valid integer >= 0 for row index and column index!")
         return None
     
-    print(f"Value of cell to be updated: row index {rowIndex} column index {columnIndex}")
-    print(f"Current value is: {matrix[rowIndex][columnIndex]}")
-    print(f"New value to be updated in cell [{rowIndex}][{columnIndex}]: {newValue}")
+    if info:
+        print(f"Value of cell to be updated: row index {rowIndex} column index {columnIndex}")
+        print(f"Current value is: {matrix[rowIndex][columnIndex]}")
+        print(f"New value to be updated in cell [{rowIndex}][{columnIndex}]: {newValue}")
     matrix[rowIndex][columnIndex] = newValue
     return matrix
 
-def setLeftColumn(matrix, value):
-    print("\nsetLeftColumn(): Sets all elements in the first column to the same value")
+def setLeftColumn(matrix, value, info = 0):
+    if info:
+        print("\nsetLeftColumn()")
+        print("Sets all elements in the first column to the same value")
 
     if isinstance(matrix[0],list): # * Is a matrix
         
@@ -129,34 +146,37 @@ def setLeftColumn(matrix, value):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
             return None
-        
-        print(f"Setting left column to value: {value}")
+        if info:
+            print(f"Setting left column to value: {value}")
         
         for row in range(len(matrix)):
             matrix[row][0] = value
 
-        print("New matrix:")
-        print2DMatrix(matrix)
+        if info:
+            print("New matrix:")
+            print2DMatrix(matrix)
 
     elif isinstance(matrix, list): # * Is a list
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
             return None
-        
-        print(f"Setting left column to value: {value}")
+        if info:
+            print(f"Setting left column to value: {value}")
         
         matrix[0] = value
-
-        print("New List:")
-        printList(matrix)
+        if info:
+            print("New List:")
+            printList(matrix)
     else:
         print("Error occurred.")
         print("Data type is not a matrix or list!\n")
         return None
 
-def setTopRow(matrix, value):
-    print("\nsetTopRow(): Sets all elements in the first row to the same value")
+def setTopRow(matrix, value, info = 0):
+    if info:
+        print("\nsetTopRow()")
+        print("Sets all elements in the first row to the same value")
 
     if isinstance(matrix[0],list): # * Is a matrix
         
@@ -165,35 +185,40 @@ def setTopRow(matrix, value):
             print("Input value is not numeric! Please enter a valid value!")
             return None
         
-        print(f"Setting top row to value: {value}")
+        if info:
+            print(f"Setting top row to value: {value}")
         
         for column in range(len(matrix[0])):
             matrix[0][column] = value
 
-        print("New matrix:")
-        print2DMatrix(matrix)
+        if info:
+            print("New matrix:")
+            print2DMatrix(matrix)
 
     elif isinstance(matrix, list): # * Is a list
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
             return None
-        
-        print(f"Setting top row to value: {value}")
+        if info:
+            print(f"Setting top row to value: {value}")
 
         for _ in range(len(matrix)):
             matrix[_] = value
-
-        print("New List:")
-        printList(matrix)
+        if info:
+            print("New List:")
+            printList(matrix)
     else:
         print("Error occurred.")
         print("Data type is not a matrix or list!\n")
         return None
 
 
-def setDiagonal(matrix, value): # Assumes matrix is square!
-    print("\nsetDiagonal(): Sets all elements along the main diagonal to the same value. Assumes matrix is a square")
+def setDiagonal(matrix, value, info = 0): # Assumes matrix is square!
+    if info: 
+        print("\nsetDiagonal()")
+        print("Sets all elements along the main diagonal to the same value. Assumes matrix is a square")
+    
     if len(matrix) != len(matrix[0]):
         print("Error occurred.")
         print("Matrix is not square! setDiagonal(matrix, value) will not work! Exiting...")
@@ -204,15 +229,21 @@ def setDiagonal(matrix, value): # Assumes matrix is square!
         print("Input value is not numeric! Please enter a valid value!")
         return None
     
-    print(f"Setting diagonal to value: {value}")
+    if info:
+        print(f"Setting diagonal to value: {value}")
+
     for index in range(len(matrix)):
         matrix[index][index] = value
 
-    print("New matrix:")
-    print2DMatrix(matrix)
+    if info:
+        print("New matrix:")
+        print2DMatrix(matrix)
 
-def getRows(matrix):
-    print("\nrowsIn(): Counts the number of rows in list or matrix")
+def getRows(matrix, info = 0):
+    if info:
+        print("\nrowsIn()")
+        print("Counts the number of rows in list or matrix")
+
     if isinstance(matrix[0],list):
         print(f"Matrix has {len(matrix[0])} rows.\n")
         return (len(matrix[0]))
@@ -226,8 +257,10 @@ def getRows(matrix):
         print("Data type is not a matrix or list!\n")
         return None
 
-def getColumns(matrix):
-    print("\ncolumnsIn(): Counts the number of columns in list or matrix")
+def getColumns(matrix, info = 0):
+    if info:
+        print("\ncolumnsIn()")
+        print("Counts the number of columns in list or matrix")
     if isinstance(matrix[0],list):
         print(f"Matrix has {len(matrix[0])} columns.\n")
         return (len(matrix[0]))
@@ -241,10 +274,11 @@ def getColumns(matrix):
         print("Data type is not a matrix or list!\n")
         return None
     
-def getMax(matrix, returnRow = 0, returnColumn = 0):
-    
-    print("\ngetMax(): Returns the maximum element in matrix or list. Set returnRow = 1 to return the row index of maximum and or set returnColumn = 1 to return the column index of maximum")
-    print("Returns max element, max element's row, max element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
+def getMax(matrix, returnRow = 0, returnColumn = 0, info = 0):
+    if info:
+        print("\ngetMax()")
+        print("Set returnRow = 1 to return the row index of maximum and or set returnColumn = 1 to return the column index of maximum")
+        print("Returns max element, max element's row, max element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
 
     if isinstance(matrix[0],list): # * Is a matrix
@@ -260,8 +294,8 @@ def getMax(matrix, returnRow = 0, returnColumn = 0):
                         maxValue = matrix[row][col]
                         maxRow = row
                         maxCol = col
-            
-            print(f"Maximum of matrix is : {maxValue}.\n")
+            if info:
+                print(f"Maximum of matrix is : {maxValue}.\n")
 
             match requiredResult:
                 case "11":
@@ -287,8 +321,8 @@ def getMax(matrix, returnRow = 0, returnColumn = 0):
             if matrix[col] > maxValue:
                 maxValue = col
                 maxCol = col
-
-        print(f"Maximum of list is : {maxValue}.\n")
+        if info:
+            print(f"Maximum of list is : {maxValue}.\n")
 
         match requiredResult:
             case "11":
@@ -311,10 +345,11 @@ def getMax(matrix, returnRow = 0, returnColumn = 0):
         print("Data type is not a matrix or list!\n")
         return None
     
-def getMin(matrix, returnRow = 0, returnColumn = 0):
-
-    print("\ngetMin(): Returns the minimum element in matrix or list. Set returnRow = 1 to return the row index of minimum and or set returnColumn = 1 to return the column index of minimum")
-    print("Returns min element, min element's row, min element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
+def getMin(matrix, returnRow = 0, returnColumn = 0, info = 0):
+    if info:
+        print("\ngetMin()")
+        print("Set returnRow = 1 to return the row index of minimum and or set returnColumn = 1 to return the column index of minimum")
+        print("Returns min element, min element's row, min element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
 
     if isinstance(matrix[0],list): # * Is a matrix
@@ -330,8 +365,8 @@ def getMin(matrix, returnRow = 0, returnColumn = 0):
                         minValue = matrix[row][col]
                         minRow = row
                         minCol = col
-            
-            print(f"Maximum of matrix is : {minValue}.\n")
+            if info:
+                print(f"Maximum of matrix is : {minValue}.\n")
 
             match requiredResult:
                 case "11":
@@ -359,8 +394,8 @@ def getMin(matrix, returnRow = 0, returnColumn = 0):
             if matrix[col] < minValue:
                 minValue = col
                 minCol = col
-
-        print(f"Maximum of list is : {minValue}.\n")
+        if info:
+            print(f"Maximum of list is : {minValue}.\n")
 
         match requiredResult:
             case "11":
@@ -386,9 +421,10 @@ def getMin(matrix, returnRow = 0, returnColumn = 0):
         return None
     
 
-def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberInclusive = 0, stringLength = 0, seed = 0):
-    
-    print("\ncreateListRandom(): Creates a random list. Some of the parameters are required; some are not. It will return error(s) if required parameter(s) are absent.")
+def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberInclusive = 0, stringLength = 0, seed = 0, info = 0):
+    if info:
+        print("\ncreateListRandom()")
+        print("Creates a random list. Some of the parameters are required; some are not. It will return error(s) if required parameter(s) are absent.")
 
     try:
         size = int(size)
@@ -475,9 +511,10 @@ def createListRandom(dataType, size, startingNumberInclusive = 0, endingNumberIn
             print("Please enter a valid parameter type for dataType for createListRandom()!. It should either be 'int', 'float' or 'str'!")
             return None
 
-def create2DMatrixRandom(dataType, rows = 1, columns = 1,startingNumberInclusive = 0, endingNumberInclusive = 10, stringLength = 0, seed = 0):
-
-    print("\ncreate2DMatrixRandom(): Creates a random matrix. Some of the parameters are required; some are not. It will return error(s) if required parameter(s) are absent.")
+def create2DMatrixRandom(dataType, rows = 1, columns = 1,startingNumberInclusive = 0, endingNumberInclusive = 10, stringLength = 0, seed = 0, info = 0):
+    if info:
+        print("\ncreate2DMatrixRandom()")
+        print("Creates a random matrix. Some of the parameters are required; some are not. It will return error(s) if required parameter(s) are absent.")
 
     try:
         rows = int(rows)

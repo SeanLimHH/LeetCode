@@ -98,3 +98,7 @@ Inputing whether the graph should be directional and should have weights, it cal
 10. dfs
 11. bellman_ford
 12. dijkstra
+
+#togglePrinting
+Create a TogglePrint object, call .enable() or .e() to enable printing; .disable() or .d() to disable printing
+1. TogglePrint
