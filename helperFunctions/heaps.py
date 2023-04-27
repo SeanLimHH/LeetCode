@@ -123,7 +123,7 @@ class MaxHeap:
             if self.getLeftChild(index) is None: #* No children
                 return None
             else: #* Has left child, no right child
-                if self.getLeftChild(index) > self.heap[index]:
+                if self.heap[self.getLeftChild(index)] > self.heap[index]:
                     self.swap(index, self.getLeftChild(index))
                     return self.maxHeapify(self.getLeftChild(index))
 
@@ -149,9 +149,8 @@ class MaxHeap:
         self.swap(0,self.size-1)
 
         maxValue = self.heap.pop()
-
-        self.maxHeapify(0)
         self.size -= 1
+        self.maxHeapify(0)
 
         if info:
             print(f"Max value extracted is {maxValue}.")
@@ -275,8 +274,9 @@ class MinHeap:
         self.size = n
         
         for i in range((n // 2)-1,-1,-1):
-            
+            print("i",i)
             self.minHeapify(i)
+            self.printHeap()
 
         if info:
             print("Built min heap:")
@@ -292,11 +292,13 @@ class MinHeap:
             if self.getLeftChild(index) is None: #* No children
                 return None
             else: #* Has left child, no right child
-                if self.getLeftChild(index) < self.heap[index]:
+                if self.heap[self.getLeftChild(index)] < self.heap[index]:
+                    self.printHeap()
                     self.swap(index, self.getLeftChild(index))
                     return self.minHeapify(self.getLeftChild(index))
 
         else: #* Has both children
+            
             if self.heap[self.getLeftChild(index)] > self.heap[self.getRightChild(index)]:
                 #* Here means: Left child is > Right child
                 #* We then check if parent is more than right child. If so, swap with right child
@@ -316,13 +318,49 @@ class MinHeap:
             print("\nMinHeap.extractMin()")
             
         self.swap(0,self.size-1)
-
         minValue = self.heap.pop()
-
-        self.minHeapify(0)
         self.size -= 1
+        self.minHeapify(0)
 
         if info:
             print(f"Min value extracted is {minValue}.")
 
         return minValue
+
+def heapsort(array, ascending = 0, descending = 1, info = 0):
+    
+    if info:
+        print("\nheapsort()")
+
+    sortedList = []
+
+    if ascending == 1:
+        if info:
+            print("Array to be sorted will be in ascending order.")
+        minHeap = MinHeap()
+        minHeap.buildMinHeap(array,info=1)
+        for _ in range(minHeap.size-1):
+            sortedList.append(minHeap.extractMin())
+            minHeap.printHeap()
+            minHeap.minHeapify(0)
+
+        sortedList.append(minHeap.extractMin())
+
+    elif descending == 1:
+        if info:
+            print("Array to be sorted will be in descending order.")
+        maxHeap = MaxHeap()
+
+        maxHeap.buildMaxHeap(array,info=1)
+        for _ in range(maxHeap.size-1):
+            sortedList.append(maxHeap.extractMax())
+            maxHeap.printHeap()
+            maxHeap.maxHeapify(0)
+
+        sortedList.append(maxHeap.extractMax())
+        
+
+    print(sortedList)
+    return sortedList
+
+

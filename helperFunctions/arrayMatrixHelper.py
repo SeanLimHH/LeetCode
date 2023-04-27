@@ -4,23 +4,40 @@ def createList(size, initialisedValue = 0, info = 0):
         printList([initialisedValue for _ in range(size)])
     return [initialisedValue for _ in range(size)]
 
-def printList(list_):
+def getDimensions(list_, info = 0): #* Returns False if it is not a list or matrix
+    #* Assumes that element has at least 1 element for each dimension
+    
+    a = list_
+    count = 0
+    while isinstance(a,list):
+        a = a[0]
+        count += 1
+        
+    if info:
+        print('\ngetDimensions()')
+        match count:
+            case 0:
+                print(f"{list_} is not a list or matrix!")
+                print(f"{list_} data type is of {type(list_)}.")
+                
+            case 1:
+                print(f"{list_} is a list!")
+                
+            case _:
+                print(f"{list_} is a {count}-dimensional matrix!")
+                
+        print(f"Number of dimensions of input is {count}.")
+    return count
+        
 
-    try:
-        if (isinstance(list_[0],list)):
-            print("Error occurred.")
-            print("The input for printList() is not a list! Please input the correct data structure!")
-            return None
-        
-        if (isinstance(list_,str)):
-            print("Error occurred.")
-            print("The input for printList() is not a list! Please input the correct data structure!")
-            return None
-        
-    except TypeError:
-            print("Error occurred.")
-            print("The input for printList() is not a list! Please input the correct data structure!")
-            return None
+
+def printList(list_):
+    print("\nprintList()")
+
+    if getDimensions(list_) != 1:
+        print("Error occurred.")
+        print("The input for printList() is not a list! Please input the correct data structure!")
+        return None
     
     print("Display of list:")
     print("Number of columns (size):",len(list_))
@@ -47,20 +64,11 @@ def create2DMatrix(rows, columns, initialisedValue = 0, info = 0):
     return [[initialisedValue for _ in range(columns)] for _ in range(rows)]
 
 def print2DMatrix(matrix):
-    try:
-        if (not isinstance(matrix[0],list)):
-            print("Error occurred.")
-            print("The input for print2DMatrix() is not a 2D array or matrix! Please input the correct data structure!")
-            return None
-        
-        if (isinstance(matrix, str)):
-            print("Error occurred.")
-            print("The input for print2DMatrix() is not a list! Please input the correct data structure!")
-            return None
-        
-    except TypeError:
+    print("\nprint2DMatrix()")
+
+    if getDimensions(matrix) != 2:
         print("Error occurred.")
-        print("The input for print2DMatrix() is not a 2D array or matrix! Please input the correct data structure!")
+        print("The input for print2DMatrix() is not a matrix! Please input the correct data structure!")
         return None
     
     print("Display of two-dimensional matrix:")
@@ -85,23 +93,12 @@ def getEntry(matrix, rowIndex, columnIndex, info = 0):
     if info:
         print("\ngetEntry()")
         print(f"Returns the entry in the matrix at row {rowIndex} and column {columnIndex}.")
-    try:
-        rowIndex = int(rowIndex)
-        columnIndex = int(columnIndex)
-
-        if rowIndex >= len(matrix):
-            print("Error occurred.")
-            print("Row index is larger than number of rows! Please enter a valid row index!")
-            return None
-
-        if columnIndex >= len(matrix):
-            print("Error occurred.")
-            print("Column index is larger than number of columns! Please enter a valid column index!")
-            return None
-        
-    except ValueError:
-        print("Please enter a valid integer >= 0 for row index and column index!")
+    
+    if getDimensions(matrix) != 2:
+        print("Error occurred.")
+        print("The input for getEntry() is not a matrix! Please input the correct data structure!")
         return None
+    
     if info:
         print(f"Value of cell: row index {rowIndex} column index {columnIndex} is :", matrix[rowIndex][columnIndex])
     return matrix[rowIndex][columnIndex]
@@ -110,6 +107,12 @@ def setEntry(matrix, rowIndex, columnIndex, newValue, info = 0):
     if info:
         print("\nsetEntry()")
         print("Updates entry of matrix. It is simply matrix[rowIndex][columnIndex] = value")
+    
+    if getDimensions(matrix) != 2:
+        print("Error occurred.")
+        print("The input for setEntry() is not a matrix! Please input the correct data structure!")
+        return None
+    
     try:
         rowIndex = int(rowIndex)
         columnIndex = int(columnIndex)
@@ -139,13 +142,19 @@ def setLeftColumn(matrix, value, info = 0):
     if info:
         print("\nsetLeftColumn()")
         print("Sets all elements in the first column to the same value")
-
-    if isinstance(matrix[0],list): # * Is a matrix
+    
+    if getDimensions(matrix) != 1 and getDimensions(matrix) != 2:
+        print("Error occurred.")
+        print("The input for setLeftColumn() is not a list or matrix! Please input the correct data structure!")
+        return None
+    
+    if getDimensions(matrix) == 2:
         
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
             return None
+        
         if info:
             print(f"Setting left column to value: {value}")
         
@@ -156,7 +165,9 @@ def setLeftColumn(matrix, value, info = 0):
             print("New matrix:")
             print2DMatrix(matrix)
 
-    elif isinstance(matrix, list): # * Is a list
+    
+    if getDimensions(matrix) == 1:
+    
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
@@ -165,20 +176,22 @@ def setLeftColumn(matrix, value, info = 0):
             print(f"Setting left column to value: {value}")
         
         matrix[0] = value
+
         if info:
             print("New List:")
             printList(matrix)
-    else:
-        print("Error occurred.")
-        print("Data type is not a matrix or list!\n")
-        return None
 
 def setTopRow(matrix, value, info = 0):
     if info:
         print("\nsetTopRow()")
         print("Sets all elements in the first row to the same value")
-
-    if isinstance(matrix[0],list): # * Is a matrix
+    
+    if getDimensions(matrix) != 1 and getDimensions(matrix) != 2:
+        print("Error occurred.")
+        print("The input for setTopRow() is not a list or matrix! Please input the correct data structure!")
+        return None
+    
+    if getDimensions(matrix) == 2:
         
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
@@ -186,7 +199,7 @@ def setTopRow(matrix, value, info = 0):
             return None
         
         if info:
-            print(f"Setting top row to value: {value}")
+            print(f"Setting the top row to value: {value}")
         
         for column in range(len(matrix[0])):
             matrix[0][column] = value
@@ -195,29 +208,32 @@ def setTopRow(matrix, value, info = 0):
             print("New matrix:")
             print2DMatrix(matrix)
 
-    elif isinstance(matrix, list): # * Is a list
+    
+    if getDimensions(matrix) == 1:
+    
         if not isinstance(value, float) and not isinstance(value, int):
             print("Error occurred.")
             print("Input value is not numeric! Please enter a valid value!")
             return None
+        
         if info:
-            print(f"Setting top row to value: {value}")
-
-        for _ in range(len(matrix)):
-            matrix[_] = value
+            print(f"Setting the top row to value: {value}")
+        
+        matrix[0] = value
+        
         if info:
             print("New List:")
             printList(matrix)
-    else:
-        print("Error occurred.")
-        print("Data type is not a matrix or list!\n")
-        return None
-
 
 def setDiagonal(matrix, value, info = 0): # Assumes matrix is square!
     if info: 
         print("\nsetDiagonal()")
         print("Sets all elements along the main diagonal to the same value. Assumes matrix is a square")
+    
+    if getDimensions(matrix) != 2:
+        print("Error occurred.")
+        print("The input for setDiagonal() is not a matrix! Please input the correct data structure!")
+        return None
     
     if len(matrix) != len(matrix[0]):
         print("Error occurred.")
@@ -241,38 +257,37 @@ def setDiagonal(matrix, value, info = 0): # Assumes matrix is square!
 
 def getRows(matrix, info = 0):
     if info:
-        print("\nrowsIn()")
+        print("\ngetRows()")
         print("Counts the number of rows in list or matrix")
-
-    if isinstance(matrix[0],list):
+            
+    if getDimensions(matrix) == 2:
         print(f"Matrix has {len(matrix[0])} rows.\n")
         return (len(matrix[0]))
     
-    elif isinstance(matrix, list):
+    if getDimensions(matrix) == 1:
         print(f"List has 1 row.\n")
         return 1
     
-    else:
-        print("Error occurred.")
-        print("Data type is not a matrix or list!\n")
-        return None
+    print("Error occurred.")
+    print("Data type is not a matrix or list!\n")
+    return None
 
 def getColumns(matrix, info = 0):
     if info:
-        print("\ncolumnsIn()")
+        print("\ngetColumns()")
         print("Counts the number of columns in list or matrix")
-    if isinstance(matrix[0],list):
+            
+    if getDimensions(matrix) == 2:
         print(f"Matrix has {len(matrix[0])} columns.\n")
         return (len(matrix[0]))
-        
-    elif isinstance(matrix, list):
-        print(f"List has {len(matrix)} columns.\n")
-        return (len(matrix))
     
-    else:
-        print("Error occurred.")
-        print("Data type is not a matrix or list!\n")
-        return None
+    if getDimensions(matrix) == 1:
+        print(f"List has {len(matrix)} columns.\n")
+        return len(matrix)
+    
+    print("Error occurred.")
+    print("Data type is not a matrix or list!\n")
+    return None
     
 def getMax(matrix, returnRow = 0, returnColumn = 0, info = 0):
     if info:
@@ -281,7 +296,7 @@ def getMax(matrix, returnRow = 0, returnColumn = 0, info = 0):
         print("Returns max element, max element's row, max element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
 
-    if isinstance(matrix[0],list): # * Is a matrix
+    if getDimensions(matrix) == 2: # * Is a matrix
             
             maxValue = matrix[0][0]
             maxRow = 0
@@ -313,7 +328,7 @@ def getMax(matrix, returnRow = 0, returnColumn = 0, info = 0):
                     print("Please enter integers for parameters returnRowIndex and returnColumnIndex, setting a 1 for either or both or whichever is required.\n")
                     return None
     
-    elif isinstance(matrix, list): # * Is a list
+    elif getDimensions(matrix) == 1: # * Is a list
 
         maxValue = 0
         maxCol = 0
@@ -352,7 +367,7 @@ def getMin(matrix, returnRow = 0, returnColumn = 0, info = 0):
         print("Returns min element, min element's row, min element's column in a tuple format. If only element is required, no tuple is returned. The element itself is returned.")
     requiredResult = str(returnRow) + str(returnColumn)
 
-    if isinstance(matrix[0],list): # * Is a matrix
+    if getDimensions(matrix) == 2: #* Is a matrix
             
             minValue = matrix[0][0]
             minRow = 0
@@ -386,7 +401,7 @@ def getMin(matrix, returnRow = 0, returnColumn = 0, info = 0):
                     print("Please enter integers for parameters returnRowIndex and returnColumnIndex, setting a 1 for either or both or whichever is required.\n")
                     return None
     
-    elif isinstance(matrix, list): # * Is a list
+    elif getDimensions(matrix) == 1: #* Is a list
 
         minValue = 0
         minCol = 0
