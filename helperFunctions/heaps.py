@@ -9,7 +9,7 @@ class MaxHeap:
         
         # Check if the heap is empty
         if self.size == 0:
-            print("Heap is empty")
+            print("Heap is empty.")
             return None
             
         numLevels = math.ceil(math.log2(len(self.heap) + 1))
@@ -37,23 +37,23 @@ class MaxHeap:
     def getParent(self, index, info = 0):
         if info:
             print("\nMaxHeap.getParent()")
-            print(f'Parent of node index {index} is: {(index-1)//2}')
+            print(f'Parent of node index {index} is: {(index-1)//2}.')
         return (index-1)//2
     
     def getLeftChild(self, index, info = 0):
         if (2*index)+1 >= self.size:
             if info:
-                print("\nMaxHeap.getLeftChild() is out of range")
+                print("\nMaxHeap.getLeftChild() is out of range.")
             return None
         if info:
             print("\nMaxHeap.getLeftChild()")
-            print(f'Left child of node index {index} is: {(2*index)+1}')
+            print(f'Left child of node index {index} is: {(2*index)+1}.')
         return (2*index)+1
 
     def getRightChild(self, index, info = 0):
         if (2*index)+2 >= self.size:
             if info:
-                print("\nMaxHeap.getRightChild() is out of range")
+                print("\nMaxHeap.getRightChild() is out of range.")
             return None
         if info:
             print("\nMaxHeap.getRightChild()")
@@ -117,7 +117,7 @@ class MaxHeap:
 
         if info:
             print("\nMaxHeap.maxHeapify()")
-            print(f"Heapifying index {index}: {self.heap[index]}")
+            print(f"Heapifying index {index}: {self.heap[index]}.")
         
         if self.getRightChild(index) is None: #* No right child, may have left child
             if self.getLeftChild(index) is None: #* No children
@@ -177,7 +177,7 @@ class MinHeap:
         
         # Check if the heap is empty
         if self.size == 0:
-            print("Heap is empty")
+            print("Heap is empty.")
             return None
             
         numLevels = math.ceil(math.log2(len(self.heap) + 1))
@@ -205,27 +205,27 @@ class MinHeap:
     def getParent(self, index, info = 0):
         if info:
             print("\nMinHeap.getParent()")
-            print(f'Parent of node index {index} is: {(index-1)//2}')
+            print(f'Parent of node index {index} is: {(index-1)//2}.')
         return (index-1)//2
     
     def getLeftChild(self, index, info = 0):
         if (2*index)+1 >= self.size:
             if info:
-                print("\nMinHeap.getLeftChild() is out of range")
+                print("\nMinHeap.getLeftChild() is out of range.")
             return None
         if info:
             print("\nMinHeap.getLeftChild()")
-            print(f'Left child of node index {index} is: {(2*index)+1}')
+            print(f'Left child of node index {index} is: {(2*index)+1}.')
         return (2*index)+1
 
     def getRightChild(self, index, info = 0):
         if (2*index)+2 >= self.size:
             if info:
-                print("\nMinHeap.getRightChild() is out of range")
+                print("\nMinHeap.getRightChild() is out of range.")
             return None
         if info:
             print("\nMinHeap.getRightChild()")
-            print(f'Right child of node index {index} is: {(2*index)+2}')
+            print(f'Right child of node index {index} is: {(2*index)+2}.')
         return (2*index)+2
 
     def swap(self, A, B, info = 0):
@@ -341,7 +341,6 @@ def heapsort(array, ascending = 0, descending = 1, info = 0):
         minHeap.buildMinHeap(array,info=1)
         for _ in range(minHeap.size-1):
             sortedList.append(minHeap.extractMin())
-            minHeap.printHeap()
             minHeap.minHeapify(0)
 
         sortedList.append(minHeap.extractMin())
@@ -354,13 +353,8 @@ def heapsort(array, ascending = 0, descending = 1, info = 0):
         maxHeap.buildMaxHeap(array,info=1)
         for _ in range(maxHeap.size-1):
             sortedList.append(maxHeap.extractMax())
-            maxHeap.printHeap()
             maxHeap.maxHeapify(0)
 
         sortedList.append(maxHeap.extractMax())
         
-
-    print(sortedList)
     return sortedList
-
-

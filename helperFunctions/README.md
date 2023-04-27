@@ -122,7 +122,34 @@ Implements max heap and min heap with its basic functions
 18. MinHeap.buildMaxHeap
 19. MinHeap.maxHeapify
 20. MinHeap.extractMax
+21. MaxHeap.heapsort
+22. MinHeap.heapsort
 
 # togglePrinting.py
 Create a TogglePrint object, call .enable() or .e() to enable printing; .disable() or .d() to disable printing
 1. TogglePrint
+
+# binaryTrees.py
+1. isNode
+2. BinaryNode
+3. BinaryNode.setKey
+4. BinaryNode.getKey
+5. BinaryNode.setValue
+6. BinaryNode.getValue
+7. BinaryNode.setParent
+8. BinaryNode.getParent
+9. BinaryNode.setLeft
+10. BinaryNode.getLeft
+11. BinaryNode.setRight
+12. BinaryNode.getRight
+13. BinarySearchTree
+14. BinarySearchTree.getMax
+15. BinarySearchTree.getMin
+16. BinarySearchTree.getSuccessor
+17. BinarySearchTree.getPredecessor
+18. BinarySearchTree.printTree
+19. BinarySearchTree.printTreeHelper
+20. BinarySearchTree.insertNode
+21. BinarySearchTree.iterateDown
+22. BinarySearchTree.searchKey
+23. BinarySearchTree.deleteKey
