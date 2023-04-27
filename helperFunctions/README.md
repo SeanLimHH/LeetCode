@@ -31,6 +31,7 @@ The following are currently available functions:
 13. getMin
 14. createListRandom
 15. create2DMatrixRandom
+16. getDimensions
 
 # hashing.py
 1. DirectAddressTable
