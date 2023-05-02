@@ -181,7 +181,7 @@ that proved seriously hard.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 '''
 
-def solution(A, B): #* This is the final solution, a clean version without print statements. Beats 74.83%
+def solution(A, B): #* This is my final solution, a clean version without print statements.
     def main(A, B):
         def getMedian(list_):
 
